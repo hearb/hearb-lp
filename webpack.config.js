@@ -1,9 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 var plugins = [];
-var css_loader = 'css-loader!sass-loader';
+var css_loader = 'css-loader!postcss-loader!sass-loader';
 if(process.env.NODE_ENV === 'production') {
 	plugins = [
 		new webpack.optimize.UglifyJsPlugin(),
@@ -14,7 +15,7 @@ if(process.env.NODE_ENV === 'production') {
 			}
 		})
 	];
-	css_loader = 'css-loader?minimize!sass-loader';
+	css_loader = 'css-loader?minimize!postcss-loader!sass-loader';
 }
 
 module.exports = [
@@ -55,6 +56,11 @@ module.exports = [
 		},
 		plugins: [
 			new ExtractTextPlugin('public/css/style.css')
+		],
+		postcss: [
+			autoprefixer({
+				browsers: ['last 2 versions']
+			})
 		]
 	}
 ];
