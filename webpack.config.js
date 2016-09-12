@@ -4,10 +4,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 var plugins = [];
-var css_loader = 'css-loader!postcss-loader!sass-loader';
+var css_loader = 'css!postcss!sass';
 if(process.env.NODE_ENV === 'production') {
 	plugins = [
-		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === 'production') {
 			}
 		})
 	];
-	css_loader = 'css-loader?minimize!postcss-loader!sass-loader';
+	css_loader = 'css?minimize!postcss!sass';
 }
 
 module.exports = [
@@ -31,7 +31,7 @@ module.exports = [
 			loaders: [
 				{
 					test: /\.tsx?$/,
-					loader: 'ts-loader',
+					loader: 'ts',
 					exclude: /node_modules/
 				}
 			]
@@ -41,21 +41,26 @@ module.exports = [
 	{
 		entry: path.join(__dirname, 'style/style.scss'),
 		output: {
-			filename: 'public/css/style.css'
+			path: path.join(__dirname, 'public/css'),
+			filename: 'style.css'
 		},
 		resolve: {
-			extensions: ['', '.scss', '.css']
+			extensions: ['', '.scss', '.woff2', '.woff', '.ttf', '.svg', '.eot', '.png']
 		},
 		module: {
 			loaders: [
 				{
 					test: /\.scss$/,
-					loader: ExtractTextPlugin.extract('style-loader', css_loader)
+					loader: ExtractTextPlugin.extract('style', css_loader)
+				},
+				{
+					test: /\.(woff2|woff|ttf|svg|eot|png)$/,
+					loader: 'file?name=[name].[ext]'
 				}
 			]
 		},
 		plugins: [
-			new ExtractTextPlugin('public/css/style.css')
+			new ExtractTextPlugin('style.css')
 		],
 		postcss: [
 			autoprefixer({

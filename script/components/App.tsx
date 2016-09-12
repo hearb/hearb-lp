@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import classnames = require('classnames');
 
-import ToastList from './ToastList';
-
+import ToastList from '../containers/ToastList';
+import Drawer from '../containers/Drawer';
 
 export default class App extends React.Component<{}, {}> {
 	handleChange = (dest: string) => {
@@ -15,6 +15,7 @@ export default class App extends React.Component<{}, {}> {
 	render(): React.ReactElement<any> {
 		return (
 			<div className="app">
+				<Drawer />
 				{this.props.children}
 				<ToastList />
 			</div>

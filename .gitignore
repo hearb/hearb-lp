@@ -1,4 +1,6 @@
 node_modules/
 typings/
-public/css/style.css
-public/js/bundle.js
+public/css/*
+!public/css/.gitkeep
+public/js/*
+!public/js/.gitkeep

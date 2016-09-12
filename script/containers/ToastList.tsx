@@ -6,7 +6,7 @@ import classnames = require('classnames');
 import {disableToast, Toast} from '../modules/toast';
 
 
-interface ToastProps {
+interface ItemProps {
 	message:   string;
 	type:      string;
 	animating: boolean;
@@ -14,7 +14,7 @@ interface ToastProps {
 	onTransitionEnd: Function;
 }
 
-class ToastItem extends React.Component<ToastProps, {}> {
+class ToastItem extends React.Component<ItemProps, {}> {
 	render(): React.ReactElement<any> {
 		const {message, type, animating, disabled} = this.props;
 
@@ -34,12 +34,12 @@ class ToastItem extends React.Component<ToastProps, {}> {
 }
 
 
-interface ToastsProps {
+interface Props {
 	toasts: Array<Toast>;
 	disableToast: Function;
 }
 
-class ToastList extends React.Component<ToastsProps, {}> {
+class ToastList extends React.Component<Props, {}> {
 	disableToast = (key: string) => {
 		return () => {
 			this.props.disableToast(key);
