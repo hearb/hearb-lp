@@ -7,3 +7,7 @@ html {
 :focus {
 	outline: 0;
 }
+
+@import '../node_modules/google-material-color/dist/palette.scss';
+
+@import './components/toast';

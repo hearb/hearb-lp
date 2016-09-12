@@ -1,0 +1,41 @@
+@keyframes toast-appear {
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.toasts {
+	position: fixed;
+	bottom: 0;
+	left: 10vw;
+	right: 10vw;
+	max-width: 400px;
+}
+
+.toast {
+	padding: .25rem .5rem;
+	&:first-child {
+		border-radius: 2px 2px 0 0;
+	}
+
+	animation: toast-appear .2s ease-in-out;
+	transition: all .2s ease-in-out;
+
+	&.animate {
+		transform: translateY(100%);
+	}
+
+	&.disabled {
+		display: none;
+	}
+
+	&.info {
+		background: rgba(palette(Blue), .54);
+		border: 1px solid palette(Blue);
+		border-bottom: 0;
+		color: palette(Blue, 900);
+	}
+}

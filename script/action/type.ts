@@ -1,7 +1,0 @@
-export const DRAWER_OPEN = 'DRAWER_OPEN';
-export const DRAWER_CLOSE = 'DRAWER_CLOSE';
-export const DRAWER_TOGGLE = 'DRAWER_TOGGLE';
-export const DRAWER_DOCKON = 'DRAWER_DOCKON';
-export const DRAWER_DOCKOFF = 'DRAWER_DOCKOFF';
-
-export const LIST_SELECT = 'LIST_SELECT';

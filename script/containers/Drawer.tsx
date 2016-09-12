@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classnames = require('classnames');
 
 export interface DrawerProps {
 	opened: boolean;
@@ -9,16 +10,13 @@ export default class Drawer extends React.Component<DrawerProps, {}> {
 	render(): React.ReactElement<any> {
 		const {opened, docked} = this.props;
 
-		let className = 'drawer';
-		if(opened) {
-			className += ' opened';
-		}
-		if(docked) {
-			className += ' docked';
-		}
+		const classname = classnames('drawer', {
+			'opened': opened,
+			'docked': docked
+		});
 
 		return (
-			<div className={className}></div>
-		) as React.ReactElement<any>;
+			<div className={classname}></div>
+		);
 	}
 }

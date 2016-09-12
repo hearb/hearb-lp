@@ -9,7 +9,10 @@
     "redux-thunk": "registry:npm/redux-thunk#2.0.0+20160525185520"
   },
   "globalDevDependencies": {
+    "classnames": "registry:dt/classnames#0.0.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20160909174046",
     "redux": "registry:dt/redux#3.5.2+20160703092728",
-    "redux-logger": "registry:dt/redux-logger#2.6.0+20160619033847"
+    "redux-logger": "registry:dt/redux-logger#2.6.0+20160619033847",
+    "shortid": "registry:dt/shortid#0.0.0+20160316155526"
   }
 }
