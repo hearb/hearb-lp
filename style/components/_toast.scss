@@ -17,6 +17,9 @@
 
 .toast {
 	padding: .25rem .5rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	&:first-child {
 		border-radius: 2px 2px 0 0;
 	}

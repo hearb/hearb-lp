@@ -1,4 +1,4 @@
-@import "../node_modules/sanitize.css/sanitize.css";
+@import "../node_modules/sanitize.css/sanitize";
 
 html {
 	-webkit-tap-highlight-color: transparent;
@@ -8,7 +8,15 @@ html {
 	outline: 0;
 }
 
-@import '../node_modules/google-material-color/dist/palette.scss';
-@import '../node_modules/webpack-material-design-icons/material-design-icons.css';
+.hidden {
+	display: none;
+}
 
+@import '../node_modules/google-material-color/dist/palette';
+@import '../node_modules/webpack-material-design-icons/material-design-icons';
+
+@import './partials/heading';
+
+@import "./components/drawer";
+@import "./components/header";
 @import './components/toast';

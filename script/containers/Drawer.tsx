@@ -3,16 +3,19 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import classnames = require('classnames');
 
-import {selectItem, Item} from '../modules/drawer';
+import {closeDrawer, selectItem, Item} from '../modules/drawer';
 import DrawerItem from '../components/DrawerItem';
 
 
 export interface Props {
-	opened:   boolean;
-	docked:   boolean;
-	items:    Array<Item>;
-	selected: string;
-	selectItem: Function;
+	opened:      boolean;
+	docked:      boolean;
+	rightDrawer: boolean;
+	items:       Array<Item>;
+	selected:    string;
+
+	closeDrawer: Function;
+	selectItem:  Function;
 }
 
 class Drawer extends React.Component<Props, {}> {
@@ -21,11 +24,12 @@ class Drawer extends React.Component<Props, {}> {
 
 		return () => {
 			selectItem(id);
+			closeDrawer();
 		}
 	}
 
 	render(): React.ReactElement<any> {
-		const {opened, docked, selected} = this.props;
+		const {opened, docked, rightDrawer, selected} = this.props;
 		const {onClickHandler} = this;
 
 		const items = this.props.items.map((item): React.ReactElement<any> => {
@@ -40,14 +44,22 @@ class Drawer extends React.Component<Props, {}> {
 			)
 		})
 
-		const classname = classnames('drawer', {
+		const clsContainer = classnames('drawer-container', {
 			'opened': opened,
-			'docked': docked
+			'docked': docked,
+			'right':  rightDrawer
+		})
+
+		const clsDrawer = classnames('drawer', {
+			'right': rightDrawer
 		})
 
 		return (
-			<div className={classname}>
-				{items}
+			<div className={clsContainer}>
+				<div className="drawer-bg" onClick={this.props.closeDrawer}></div>
+				<div className={clsDrawer}>
+					{items}
+				</div>
 			</div>
 		)
 	}
@@ -55,15 +67,17 @@ class Drawer extends React.Component<Props, {}> {
 
 const mapStateToProps = (state) => {
 	return {
-		opened:   state.drawer.opened,
-		docked:   state.drawer.docked,
-		items:    state.drawer.items,
-		selected: state.drawer.selected
+		opened:      state.drawer.opened,
+		docked:      state.drawer.docked,
+		rightDrawer: state.drawer.rightDrawer,
+		items:       state.drawer.items,
+		selected:    state.drawer.selected
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
+		closeDrawer: closeDrawer,
 		selectItem: selectItem
 	}, dispatch)
 }

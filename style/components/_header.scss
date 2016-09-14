@@ -1,0 +1,15 @@
+header {
+	padding: 1rem;
+	position: fixed;
+	top: 0;
+	z-index: 10;
+
+	i {
+		color: palette(White);
+		font-size: 32px;
+	}
+}
+
+main {
+	padding-top: 3rem;
+}

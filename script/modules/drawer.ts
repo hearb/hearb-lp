@@ -13,6 +13,8 @@ export const DRAWER_OPEN    = 'DRAWER_OPEN';
 export const DRAWER_CLOSE   = 'DRAWER_CLOSE';
 export const DRAWER_DOCKON  = 'DRAWER_DOCKON';
 export const DRAWER_DOCKOFF = 'DRAWER_DOCKOFF';
+export const DRAWER_LEFT    = 'DRAWER_LEFT';
+export const DRAWER_RIGHT   = 'DRAWER_RIGHT';
 export const DRAWER_SELECT  = 'DRAWER_SELECT';
 
 
@@ -48,6 +50,18 @@ export const dockOffDrawer = (): Action => {
 	}
 }
 
+export const leftDrawer = (): Action => {
+	return {
+		type: DRAWER_LEFT
+	}
+}
+
+export const rightDrawer = (): Action => {
+	return {
+		type: DRAWER_RIGHT
+	}
+}
+
 export const selectItem = (id: string): Action => {
 	return {
 		type: DRAWER_SELECT,
@@ -67,10 +81,11 @@ export interface Item {
 }
 
 interface State {
-	opened:   boolean;
-	docked:   boolean;
-	items:    Array<Item>;
-	selected: string;
+	opened:      boolean;
+	docked:      boolean;
+	rightDrawer: boolean;
+	items:       Array<Item>;
+	selected:    string;
 }
 
 const menu = [
@@ -88,10 +103,11 @@ const items = menu.map((item): Item => {
 })
 
 const initial: State = {
-	opened: false,
-	docked: false,
-	items: items,
-	selected: items[0].id
+	opened:      false,
+	docked:      false,
+	rightDrawer: false,
+	items:       items,
+	selected:    items[0].id
 }
 
 export const drawerReducer = (state: State = initial, action: Action): State => {
@@ -114,6 +130,16 @@ export const drawerReducer = (state: State = initial, action: Action): State => 
 		case DRAWER_DOCKOFF:
 			return assign({}, state, {
 				docked: false
+			})
+
+		case DRAWER_LEFT:
+			return assign({}, state, {
+				rightDrawer: false
+			})
+
+		case DRAWER_RIGHT:
+			return assign({}, state, {
+				rightDrawer: true
 			})
 
 		case DRAWER_SELECT:

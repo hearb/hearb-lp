@@ -6,6 +6,7 @@ import classnames = require('classnames');
 
 import ToastList from '../containers/ToastList';
 import Drawer from '../containers/Drawer';
+import Header from '../containers/Header';
 
 export default class App extends React.Component<{}, {}> {
 	handleChange = (dest: string) => {
@@ -16,7 +17,10 @@ export default class App extends React.Component<{}, {}> {
 		return (
 			<div className="app">
 				<Drawer />
-				{this.props.children}
+				<div className="main">
+					<Header />
+					{this.props.children}
+				</div>
 				<ToastList />
 			</div>
 		);
